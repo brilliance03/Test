@@ -34,24 +34,43 @@ def sanitize(time_string):
     return (minut + "." + second)
 
 
-clean_james = []
-clean_julie = []
-clean_mikey = []
-clean_sarah = []
+##clean_james = []
+##clean_julie = []
+##clean_mikey = []
+##clean_sarah = []
+##
+##for each_item in james:
+##    clean_james.append(sanitize(each_item))
+##
+##for each_item in julie:
+##    clean_julie.append(sanitize(each_item))
+##
+##for each_item in mikey:
+##    clean_mikey.append(sanitize(each_item))
+##
+##for each_item in sarah:
+##    clean_sarah.append(sanitize(each_item))
+##
+##
+##print(sorted(clean_james))
+##print(sorted(clean_julie))
+##print(sorted(clean_mikey))
+##print(sorted(clean_sarah))
 
-for each_item in james:
-    clean_james.append(sanitize(each_item))
+print(sorted([sanitize(each_item) for each_item in james]))
+print(sorted([sanitize(each_item) for each_item in julie]))
+print(sorted([sanitize(each_item) for each_item in mikey]))
+print(sorted([sanitize(each_item) for each_item in sarah]))
 
-for each_item in julie:
-    clean_julie.append(sanitize(each_item))
+unique_james = []
 
-for each_item in mikey:
-    clean_mikey.append(sanitize(each_item))
+##for each_item in sorted([sanitize(each_item) for each_item in james]):
+##    if each_item not in unique_james:
+##        unique_james.append(each_item)
 
-for each_item in sarah:
-    clean_sarah.append(sanitize(each_item))
+##print(unique_james[0:3])
 
-print(sorted(clean_james))
-print(sorted(clean_julie))
-print(sorted(clean_mikey))
-print(sorted(clean_sarah))
+print(sorted(set([sanitize(each_item) for each_item in james]))[0:3])
+
+
+
