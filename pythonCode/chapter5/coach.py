@@ -13,6 +13,17 @@ class Athlete:
     def add_times(self,times):
         self.times.extend(times)
 
+
+class AthleteList(list):
+    def __init__(self,a_name,a_dob=None,a_times=[]):
+        list.__init__([])
+        self.name = a_name
+        self.dob = a_dob
+        self.extend(a_times)
+
+    def top3(self):
+        return(sorted(set(sanitize(t) for t in self))[0:3])
+
     
 
 def sanitize(time_string):
@@ -67,3 +78,21 @@ print(sarah.name + "'s fastest time are: " + str(sarah.top3()))
 sarah.add_times(['1.11','3:12','4-15'])
 sarah.add_time('1.00')
 print(sarah.name + "'s fastest time are: " + str(sarah.top3()))
+
+
+def getDataFromList(filename):
+    try:
+        with open(filename) as f:
+            data = f.readline()
+            dataList = data.strip().split(',')
+            return(AthleteList(dataList.pop(0),
+                                  dataList.pop(0),
+                                  dataList))
+
+    except IOError as ioerr:
+        print('File error: ' + str(ioerr))
+        return(None)
+
+sarah2 = getDataFromList('sarah2.txt')
+print(sarah2.name + "'s new fastest time are: " + str(sarah2.top3()))
+            
