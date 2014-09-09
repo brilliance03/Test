@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head lang="zh">
+    <meta charset="UTF-8">
+    <title>基于开源软件的WebGIS地图应用</title>
+
+    <!-- 引入leaflet的css和js文件 -->
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
+    <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+
+
+</head>
+<body>
+    <div id="map" style="height: 620px; width: 100%"></div>
+
+    <script type="text/javascript">
+        <!--地图初始化-->
+        var map = L.map('map',{
+            center: [39, 116]
+        }).setView([39, 116], 10);
+
+        <!--设置瓦片层-->
+        L.tileLayer('http://{s}.mapabc.com/mapabc/maptile?&x={x}&y={y}&z={z}', {
+            subdomains: ["emap1", "emap2", "emap3"],
+            attribution: '交付中心GIS开发组',
+            maxZoom: 14,
+            minZoom: 1
+        }).addTo(map)
+
+        <!--增加一个marker-->
+        var marker = L.marker([30,118]).addTo(map);
+
+        marker.bindPopup("这是一个弹出窗").openPopup();
+
+        var popup = L.popup();
+
+        function onMapClick(e) {
+            popup
+                    .setLatLng(e.latlng)
+                    .setContent("你点击了地图上的：" + e.latlng.toString())
+                    .openOn(map);
+        }
+
+        map.on('click', onMapClick);
+    </script>
+</body>
+</html>
